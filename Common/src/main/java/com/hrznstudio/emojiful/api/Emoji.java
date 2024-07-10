@@ -27,9 +27,9 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Emoji implements Predicate<String> {
-    public static final ResourceLocation loading_texture = new ResourceLocation(Constants.MOD_ID, "textures/gui/26a0.png");
-    public static final ResourceLocation noSignal_texture = new ResourceLocation(Constants.MOD_ID, "textures/gui/26d4.png");
-    public static final ResourceLocation error_texture = new ResourceLocation(Constants.MOD_ID, "textures/gui/26d4.png");
+    public static final ResourceLocation loading_texture = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/26a0.png");
+    public static final ResourceLocation noSignal_texture = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/26d4.png");
+    public static final ResourceLocation error_texture = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/26d4.png");
 
     public static final AtomicInteger threadDownloadCounter = new AtomicInteger(0);
     public static final AtomicInteger threadFileLoaderCounter = new AtomicInteger(0);
@@ -152,7 +152,7 @@ public class Emoji implements Predicate<String> {
             } else {
                 try {
                     DownloadImageData imageData = new DownloadImageData(ImageIO.read(cache), loading_texture);
-                    ResourceLocation resourceLocation = new ResourceLocation(Constants.MOD_ID, "texures/emoji/" + name.toLowerCase().replaceAll("[^a-z0-9/._-]", "") + "_" + version);
+                    ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "texures/emoji/" + name.toLowerCase().replaceAll("[^a-z0-9/._-]", "") + "_" + version);
                     Minecraft.getInstance().getTextureManager().register(resourceLocation, imageData);
                     img.add(imageData);
                     frames.add(resourceLocation);
@@ -179,7 +179,7 @@ public class Emoji implements Predicate<String> {
             int i = 0;
             for (Pair<BufferedImage, Integer> bufferedImage : framesPair) {
                 DownloadImageData imageData = new DownloadImageData(bufferedImage.getKey(), loading_texture);
-                ResourceLocation resourceLocation = new ResourceLocation(Constants.MOD_ID, "texures/emoji/" + name.toLowerCase().replaceAll("[^a-z0-9/._-]", "") + "_" + version + "_frame" + i);
+                ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "texures/emoji/" + name.toLowerCase().replaceAll("[^a-z0-9/._-]", "") + "_" + version + "_frame" + i);
                 Minecraft.getInstance().getTextureManager().register(resourceLocation, imageData);
                 img.add(imageData);
                 for (Integer integer = 0; integer < bufferedImage.getValue(); integer++) {

@@ -5,7 +5,7 @@ buildscript {
 }
 
 plugins {
-    id 'net.neoforged.gradle.userdev' version '7.0.80'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
 }
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -19,30 +19,49 @@ archivesBaseName = "${build_file_name}-Neoforge-${minecraft_version}"
 
 minecraft.accessTransformers.file file("src/main/resources/META-INF/accesstransformer.cfg")
 runs {
+    // applies to all the run configs below
     configureEach {
+        // Recommended logging data for a userdev environment
+        // The markers can be added/remove as needed separated by commas.
+        // "SCAN": For mods scan.
+        // "REGISTRIES": For firing of registry events.
+        // "REGISTRYDUMP": For getting the contents of all registries.
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+        // Recommended logging level for the console
+        // You can set various levels here.
+        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+        systemProperty 'forge.logging.console.level', 'debug'
         modSource project.sourceSets.main
-    }
-    client {
-        workingDirectory project.file('run')
-        programArgument "--username=Dev####"
-        systemProperty  'mixin.env.remapRefMap', 'true'
-        systemProperty  'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
         dependencies {
-            runtime group: "com.esotericsoftware.yamlbeans", name: "yamlbeans", version: "1.17"
+            runtime "com.esotericsoftware.yamlbeans:yamlbeans:1.17"
         }
     }
 
+    client {
+        // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
     server {
-        workingDirectory project.file('runServer')
-        systemProperty  'mixin.env.remapRefMap', 'true'
-        systemProperty  'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    // This run config launches GameTestServer and runs all registered gametests, then exits.
+    // By default, the server will crash when no gametests are provided.
+    // The gametest system is also enabled by default for other run configs under the /test command.
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
 
     data {
-        workingDirectory project.file('run')
-        //args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        systemProperty  'mixin.env.remapRefMap', 'true'
-        systemProperty  'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+        // workingDirectory project.file('run-data')
+
+        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -51,7 +70,7 @@ sourceSets.main.resources.srcDir 'src/generated/resources'
 
 
 tasks.named('jarJar') {
-    archiveClassifier.set("")
+
 }
 
 tasks.named("build").configure {
@@ -67,8 +86,8 @@ dependencies {
 
 subsystems {
     parchment {
-        minecraftVersion="1.20.3"
-        mappingsVersion="2023.12.31"
+        minecraftVersion="1.21"
+        mappingsVersion="2024.07.07"
     }
 }
 

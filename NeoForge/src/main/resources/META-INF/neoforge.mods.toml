@@ -1,8 +1,11 @@
 modLoader="javafml"
-loaderVersion="[43,)"
+loaderVersion="[1,)"
 issueTrackerURL="https://github.com/InnovativeOnlineIndustries/Emojiful/"
 side="CLIENT"
 license="MIT"
+
+[[mixins]]
+config = "emojiful.mixins.json"
 
 [[mods]]
     modId="emojiful"
@@ -12,19 +15,18 @@ license="MIT"
     description='''
     Adds Emojis to the Game Chat!!!
     '''
-    mandatory=false
     side="CLIENT"
 
 [[dependencies.emojiful]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.20.4,)"
+    type="required"
+    versionRange="[1.21,)"
     ordering="NONE"
     side="CLIENT"
 
 [[dependencies.emojiful]]
-    modId="forge"
-    mandatory=true
-    versionRange="[43.1.0,)"
+    modId="neoforge"
+    type="required"
+    versionRange="[20.4.190,)"
     ordering="NONE"
     side="CLIENT"

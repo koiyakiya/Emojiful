@@ -4,6 +4,7 @@ import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.hrznstudio.emojiful.api.Emoji;
@@ -11,9 +12,11 @@ import com.hrznstudio.emojiful.api.EmojiCategory;
 import com.hrznstudio.emojiful.api.EmojiFromGithub;
 import com.hrznstudio.emojiful.datapack.EmojiRecipe;
 import com.hrznstudio.emojiful.platform.Services;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.GLFW;
 
@@ -24,6 +27,7 @@ import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class CommonClass {
@@ -206,6 +210,7 @@ public class CommonClass {
             ClientEmojiHandler.indexEmojis();
         }
     }
+
 
     public static boolean shouldKeyBeIgnored(int keyCode){
         return keyCode == GLFW.GLFW_KEY_TAB || keyCode == GLFW.GLFW_KEY_UP || keyCode == GLFW.GLFW_KEY_DOWN || keyCode == GLFW.GLFW_KEY_LEFT || keyCode == GLFW.GLFW_KEY_RIGHT;

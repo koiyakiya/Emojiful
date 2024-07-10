@@ -11,6 +11,7 @@ import com.hrznstudio.emojiful.util.ProfanityFilter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -121,6 +122,11 @@ public class ClientEmojiHandler {
             Minecraft.getInstance().getEntityRenderDispatcher().font = Minecraft.getInstance().font;
             BlockEntityRenderers.register(BlockEntityType.SIGN, p_173571_ -> {
                 SignRenderer signRenderer = new SignRenderer(p_173571_);
+                signRenderer.font = Minecraft.getInstance().font;
+                return signRenderer;
+            });
+            BlockEntityRenderers.register(BlockEntityType.HANGING_SIGN, p_173571_ -> {
+                HangingSignRenderer signRenderer = new HangingSignRenderer(p_173571_);
                 signRenderer.font = Minecraft.getInstance().font;
                 return signRenderer;
             });

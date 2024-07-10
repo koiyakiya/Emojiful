@@ -1,34 +1,33 @@
 package com.hrznstudio.emojiful.datapack;
 
 import com.hrznstudio.emojiful.platform.Services;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class EmojiRecipe implements Recipe<Container> {
+public class EmojiRecipe extends CustomRecipe {
 
     private final String category;
     private final String name;
     private final String url;
 
     public EmojiRecipe(String category, String name, String url) {
+        super(CraftingBookCategory.MISC);
         this.category = category;
         this.name = name;
         this.url = url;
     }
-
     @Override
-    public boolean matches(Container inv, Level worldIn) {
+    public boolean matches(CraftingInput craftingInput, Level level) {
         return false;
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
+    public ItemStack assemble(CraftingInput craftingInput, HolderLookup.Provider provider) {
         return ItemStack.EMPTY;
     }
 
@@ -38,7 +37,7 @@ public class EmojiRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return ItemStack.EMPTY;
     }
 

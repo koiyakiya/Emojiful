@@ -60,10 +60,10 @@ public class EmojiUtil extends RenderType {
 
         VertexConsumer builder = buffer.getBuffer(createRenderType(emoji));
 
-        builder.vertex(matrix, x - offsetX, y - offsetY, 0.0f).color(255, 255, 255, 255).uv(textureX, textureY).uv2(packedLight).endVertex();
-        builder.vertex(matrix, x - offsetX, y + size - offsetY, 0.0F).color(255, 255, 255, 255).uv(textureX, textureY + textureOffset).uv2(packedLight).endVertex();
-        builder.vertex(matrix, x - offsetX + size, y + size - offsetY, 0.0F).color(255, 255, 255, 255).uv(textureX + textureOffset, textureY + textureOffset).uv2(packedLight).endVertex();
-        builder.vertex(matrix, x - offsetX + size, y - offsetY, 0.0F).color(255, 255, 255, 255).uv(textureX + textureOffset, textureY / textureSize).uv2(packedLight).endVertex();
+        builder.addVertex(matrix, x - offsetX, y - offsetY, 0.0f).setColor(255, 255, 255, 255).setUv(textureX, textureY).setLight(packedLight);
+        builder.addVertex(matrix, x - offsetX, y + size - offsetY, 0.0F).setColor(255, 255, 255, 255).setUv(textureX, textureY + textureOffset).setLight(packedLight);
+        builder.addVertex(matrix, x - offsetX + size, y + size - offsetY, 0.0F).setColor(255, 255, 255, 255).setUv(textureX + textureOffset, textureY + textureOffset).setLight(packedLight);
+        builder.addVertex(matrix, x - offsetX + size, y - offsetY, 0.0F).setColor(255, 255, 255, 255).setUv(textureX + textureOffset, textureY / textureSize).setLight(packedLight);
 
         return 10f;
     }

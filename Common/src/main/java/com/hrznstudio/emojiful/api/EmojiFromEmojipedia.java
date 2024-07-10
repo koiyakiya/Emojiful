@@ -29,7 +29,7 @@ public class EmojiFromEmojipedia extends Emoji {
             return;
 
         img = new DownloadImageData(new File("emojiful/cache/" + name + "-" + version), "https://cdn.emojidex.com/emoji/px32/" + location + ".png", loading_texture);
-        resourceLocation = new ResourceLocation(Constants.MOD_ID, "texures/emoji/" + location.toLowerCase() + "_" + version);
+        resourceLocation = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "texures/emoji/" + location.toLowerCase() + "_" + version);
         Minecraft.getInstance().getTextureManager().register(resourceLocation, img);
     }
 

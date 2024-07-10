@@ -1,6 +1,6 @@
 package com.hrznstudio.emojiful.platform;
 
-import com.hrznstudio.emojiful.EmojifulForge;
+import com.hrznstudio.emojiful.EmojifulNeoForge;
 import com.hrznstudio.emojiful.datapack.EmojiRecipe;
 import com.hrznstudio.emojiful.platform.services.IPlatformHelper;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -30,11 +30,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public RecipeType<EmojiRecipe> getRecipeType() {
-        return EmojifulForge.EMOJI_RECIPE_TYPE.get();
+        return EmojifulNeoForge.EMOJI_RECIPE_TYPE.get();
     }
 
     @Override
     public RecipeSerializer<EmojiRecipe> getRecipeSerializer() {
-        return EmojifulForge.EMOJI_RECIPE_SERIALIZER.get();
+        return EmojifulNeoForge.EMOJI_RECIPE_SERIALIZER.get();
     }
 }
