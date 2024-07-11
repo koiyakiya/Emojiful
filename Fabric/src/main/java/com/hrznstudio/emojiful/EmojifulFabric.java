@@ -11,13 +11,22 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.InBedChatScreen;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 public class EmojifulFabric implements ModInitializer {
 
 
-    public static final RecipeType<EmojiRecipe> EMOJI_RECIPE_TYPE = RecipeType.register(Constants.MOD_ID + ":emoji_recipe_type");
+    public static final RecipeType<EmojiRecipe> EMOJI_RECIPE_TYPE = Registry.register(BuiltInRegistries.RECIPE_TYPE,
+            ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "emoji_recipe_type"), new RecipeType<EmojiRecipe>() {
+                @Override
+                public String toString() {
+                    return "emoji_recipe_type";
+                }
+            });
     public static final RecipeSerializer<EmojiRecipe> EMOJI_RECIPE_SERIALIZER = RecipeSerializer.register(Constants.MOD_ID + ":emoji_recipe", new EmojiRecipeSerializer());
 
     @Override
