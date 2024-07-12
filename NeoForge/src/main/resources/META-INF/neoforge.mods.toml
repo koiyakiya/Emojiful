@@ -27,6 +27,6 @@ config = "emojiful.mixins.json"
 [[dependencies.emojiful]]
     modId="neoforge"
     type="required"
-    versionRange="[20.4.190,)"
+    versionRange="[21.0.84-beta,)"
     ordering="NONE"
     side="CLIENT"

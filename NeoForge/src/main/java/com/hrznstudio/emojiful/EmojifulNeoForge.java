@@ -35,7 +35,7 @@ public class EmojifulNeoForge {
     public EmojifulNeoForge(Dist dist, IEventBus modBus, ModContainer container) {
         RECIPE_SER.register(modBus);
         RECIPE_TYPE.register(modBus);
-        createAndLoadConfigs(container, ModConfig.Type.CLIENT, ForgeConfigHelper.setup(new ModConfigSpec.Builder()), "emojiful-client.toml");
+        createAndLoadConfigs(container, ModConfig.Type.STARTUP, ForgeConfigHelper.setup(new ModConfigSpec.Builder()), "emojiful-client.toml");
         modBus.addListener(this::handleClientSetup);
     }
 
@@ -46,16 +46,6 @@ public class EmojifulNeoForge {
 
     private static void createAndLoadConfigs(ModContainer modContainer, ModConfig.Type type, ModConfigSpec spec, String path) {
         modContainer.registerConfig(type, spec, path);
-
-        final CommentedFileConfig configData = CommentedFileConfig.builder(FMLPaths.CONFIGDIR.get().resolve(path))
-                .preserveInsertionOrder()
-                .autoreload()
-                .writingMode(WritingMode.REPLACE)
-                .sync()
-                .build();
-
-        configData.load();
-        spec.setConfig(configData);
     }
 
 }
