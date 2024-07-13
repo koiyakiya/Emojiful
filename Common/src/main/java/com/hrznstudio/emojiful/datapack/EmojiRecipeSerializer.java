@@ -23,12 +23,14 @@ public class EmojiRecipeSerializer implements RecipeSerializer<EmojiRecipe> {
         this.codec = new StreamCodec<RegistryFriendlyByteBuf, EmojiRecipe>() {
             @Override
             public EmojiRecipe decode(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
-                return null;
+                return new EmojiRecipe(registryFriendlyByteBuf.readUtf(), registryFriendlyByteBuf.readUtf(), registryFriendlyByteBuf.readUtf());
             }
 
             @Override
-            public void encode(RegistryFriendlyByteBuf o, EmojiRecipe emojiRecipe) {
-
+            public void encode(RegistryFriendlyByteBuf buff, EmojiRecipe emojiRecipe) {
+                buff.writeUtf(emojiRecipe.getCategory());
+                buff.writeUtf(emojiRecipe.getName());
+                buff.writeUtf(emojiRecipe.getUrl());
             }
         };
         this.mapCodec = RecordCodecBuilder.mapCodec(instance -> {
