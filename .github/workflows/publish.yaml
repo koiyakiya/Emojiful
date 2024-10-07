@@ -40,6 +40,7 @@ jobs:
           game-versions: |
             1.21
             1.21.1
+            1.21.2-alpha.24.40.a
           java: 21
           name: ""
           changelog: "https://github.com/InnovativeOnlineIndustries/Emojiful/commits/1.21"
@@ -58,6 +59,7 @@ jobs:
           game-versions: |
             1.21
             1.21.1
+            1.21.2-alpha.24.40.a
           java: 21
           name: ""
           changelog: "https://github.com/InnovativeOnlineIndustries/Emojiful/commits/1.21"
